@@ -21,7 +21,7 @@ export default defineConfig(({mode, command}) => {
 
   return {
     plugins: [svelte(), htmlPlugin()],
-    base = command !== 'build' ? '/':'/pokemon-cards-css/',
+    base: command !== 'build' ? '/':'/pokemon-cards-css/',
     server: {
       watch: {
         usePolling: false
