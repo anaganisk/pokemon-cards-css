@@ -2,10 +2,11 @@ import { defineConfig, loadEnv } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 
 // https://vitejs.dev/config/
-export default defineConfig(({mode}) => {
+export default defineConfig(({mode, command}) => {
 
   const venv = loadEnv(mode, process.cwd(), '')
   const env = Object.keys(venv).filter((item) => item.startsWith("VITE_")).reduce((cur, key) => { return Object.assign(cur, { [key]: venv[key] })}, {}) ;
+  
 
   const htmlPlugin = () => {
     return {
@@ -20,6 +21,7 @@ export default defineConfig(({mode}) => {
 
   return {
     plugins: [svelte(), htmlPlugin()],
+    base = command !== 'build' ? '/':'/pokemon-cards-css/',
     server: {
       watch: {
         usePolling: false
